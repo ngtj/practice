@@ -1,0 +1,29 @@
+# makefile
+
+# define macros
+CC = g++ 
+OLEVEL = -O0
+CFLAGS = $(OLEVEL) -g -W
+LDFLAGS =
+INCLUDES = -I/usr/local/include
+LIBS = 
+
+default: $(OBJS)
+	$(CC) $(LDFLAGS) -o $(TARGET) $(OBJS) $(LIBS)
+
+all: clean default
+
+clean:
+	rm -f $(TARGET) $(OBJS) 
+
+depend: $(OBJS)
+	makedepend $(SRCS) -f makefile
+	rm -f makefile.bak
+
+run:
+	./$(TARGET)
+
+# suffix rules
+%.o : %.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
