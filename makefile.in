@@ -23,6 +23,9 @@ depend: $(OBJS)
 run:
 	./$(TARGET)
 
+doc:
+	doxygen 
+
 # suffix rules
 %.o : %.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@

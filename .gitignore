@@ -3,3 +3,6 @@
 
 # target
 *.exe
+
+# document
+*/html/*
