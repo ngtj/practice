@@ -4,5 +4,8 @@
 # target
 *.exe
 
+# for mac
+*.DS_Store
+
 # document
 */html/*
