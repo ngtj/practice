@@ -3,10 +3,18 @@
 # define macros
 CC = g++ 
 OLEVEL = -O0
-CFLAGS = $(OLEVEL) -g -W
+CFLAGS = $(OLEVEL) -g -Wall -Wextra
 LDFLAGS =
 INCLUDES = -I/usr/local/include
 LIBS = 
+
+# test setting
+ifdef TEST_MODE
+INCLUDES += -I$(GTEST_DIR)include  
+LIBS += $(GTEST_DIR)make/gtest_main.a
+endif
+
+.PHONY : default all clean depend run test
 
 default: $(OBJS)
 	$(CC) $(LDFLAGS) -o $(TARGET) $(OBJS) $(LIBS)
@@ -14,7 +22,7 @@ default: $(OBJS)
 all: clean default
 
 clean:
-	rm -f $(TARGET) $(OBJS) 
+	rm -f $(TARGET) $(OBJS)
 
 depend: $(OBJS)
 	makedepend $(SRCS) -f makefile
@@ -22,9 +30,6 @@ depend: $(OBJS)
 
 run:
 	./$(TARGET)
-
-doc:
-	doxygen 
 
 # suffix rules
 %.o : %.cpp
